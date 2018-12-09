@@ -23,7 +23,7 @@ function createSetsFromList(index = 0, list = [1,2,3], newList = [], n = 0) {
     return createSetsFromList(index, list, newList, n + 1);
 }
 
-function use(origSet, powerSet = [], n = 0) {
+function recursiveBuilder(origSet, powerSet = [], n = 0) {
     const len = origSet.length -1;
 
     if (n > len) {
@@ -33,7 +33,7 @@ function use(origSet, powerSet = [], n = 0) {
     const newSets = createSetsFromList(n, origSet);
     const newPowerSet = checkSets(newSets, powerSet);
 
-    return use(origSet, newPowerSet, n + 1);
+    return recursiveBuilder(origSet, newPowerSet, n + 1);
 }
 
 function checkSets(newSets, powerSet = [], n = 0) {
@@ -53,7 +53,7 @@ function checkSets(newSets, powerSet = [], n = 0) {
 
 function main(origSet = [1,2,3]) {
     console.log('Powerset is:')
-    const powerSet = use(origSet);
+    const powerSet = recursiveBuilder(origSet);
     powerSet.unshift([]);
 
     console.log(powerSet);
